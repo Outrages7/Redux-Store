@@ -7,7 +7,7 @@ const Home = () => {
   const API_URL = "https://fakestoreapi.com/products";
 
   const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [post, setpost] = useState([]);
 
   async function fetchData() {
     setLoading(true);
@@ -15,10 +15,10 @@ const Home = () => {
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
-      setPosts(data);
+      setpost(data);
     } catch (error) {
       toast.error("Something went wrong");
-      setPosts([]);
+      setpost([]);
     }
 
     setLoading(false);
@@ -29,12 +29,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="p-6">
+    <div className="min-h-screen bg-stone-50 p-10">
       {loading ? (
         <Spinner />
-      ) : posts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {posts.map((post) => (
+      ) : post.length > 0 ? (
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {post.map((post) => (
             <Product key={post.id} post={post} />
           ))}
         </div>
